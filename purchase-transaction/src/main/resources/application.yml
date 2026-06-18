@@ -4,19 +4,28 @@ spring:
   
   # Database Configuration
   datasource:
-    url: jdbc:mysql://localhost:3306/wex_db?useSSL=false&serverTimezone=UTC
-    username: <YOUR USER>     # add your username here
-    password: <YOUR PASSWORD> # add your password here
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:h2:mem:wex_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password: 
+    driver-class-name: org.h2.Driver
   
+  # Hibernate ORM Configuration
   jpa:
     hibernate:
-      ddl-auto: update    
+      # Automatically updates the database schema to match JPA entities
+      ddl-auto: update
+    # Log SQL statements to the console for debugging
     show-sql: true
     properties:
       hibernate:
         format_sql: true
-        dialect: org.hibernate.dialect.MySQLDialect
+        dialect: org.hibernate.dialect.H2Dialect
+
+  # Enable H2 Console
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
 
 treasury:
   api:
